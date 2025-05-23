@@ -18,8 +18,8 @@
 
     <main>
         <section>
-            <div class="container ">
-                <div th:object="${pizza}" class="col-md-4 mb-4">
+            <div class="container " th:object="${pizza}">
+                <div class="col-md-4 mb-4" >
                     <div class="card" style="width: 100%;">
                         <img th:src="*{imgUrl}" class="card-img-top" alt="foto pizza">
                         <div class="card-body">
@@ -29,7 +29,23 @@
                             <a th:href="@{'/home'}" class="btn btn-primary">torna alla home</a>
                         </div>
                     </div>
+                <div class="alert alert-warning" th:unless="${pizza.getSpecialOffers().size()>0}">
+                    <h4>
+                        there is no offers
+                    </h4>
+                    <a th:href="@{/pizzas/{id}/specialOffer(id=*{id})}" class="btn btn-success">Offerta pizza</a>
                 </div>
+                </div>
+                <div class="col-md-4 mb-4" th:if="${pizza.getSpecialOffers().size()>0}">
+                    <ul>
+                        <li th:each="specialOffer : *{specialOffers}">
+                            [[${specialOffer.id}]],[[${specialOffer.title}]],[[${specialOffer.startDate}]],[[${specialOffer.endDate}]]
+                        </li>
+                    </ul>
+                    <a th:href="@{/pizzas/{id}/specialOffer(id=*{id})}" class="btn btn-success">Offerta pizza</a>
+
+                </div>
+
             </div>
         </section>
 

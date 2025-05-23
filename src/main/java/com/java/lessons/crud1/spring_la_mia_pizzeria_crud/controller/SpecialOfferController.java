@@ -30,7 +30,7 @@ public class SpecialOfferController {
 
         specialOfferRepository.save(formSpecialOffer);
 
-        return "redirect:/pizzas";
+        return "redirect:/pizzas/" + formSpecialOffer.getPizza().getId();
     }
 
 }
