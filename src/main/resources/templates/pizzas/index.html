@@ -35,6 +35,7 @@
                                 <p class="card-text" th:text="|prezzo: €*{price}|"></p>
                                 <a th:href="@{pizzas + '/' +*{id}}" class="btn btn-primary">vai alla pizza</a>
                                 <a th:href="@{pizzas/edit/{id}(id=*{id})}" class="btn btn-success">modifica pizza</a>
+                                <a th:href="@{pizzas/{id}/specialOffer(id=*{id})}" class="btn btn-success">Offerta pizza</a>
                                 <form th:action="@{pizzas/delete/{id}(id=${pizza.id})}" method="post">
                                     <button type="submit" class="btn btn-danger">cancella pizza</button>
                                 </form>

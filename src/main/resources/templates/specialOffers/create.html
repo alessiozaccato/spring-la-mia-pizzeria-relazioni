@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<th:block th:replace="~{fragments/starter::thymeleafThema}"></th:block>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <th:block th:replace="~{fragments/starter::style}"></th:block>
+
+
+
+</head>
+
+<body>
+
+    <th:block th:replace="~{fragments/navbar::navbar}"></th:block>
+
+    <main>
+        <section>
+            <div class="container ">
+                <h1 class="my-2 text-center">
+                    Special Offer for: "[[${specialOffer.pizza.name}]]"
+                </h1>
+
+                <form id="specialOffer-form" th:action="@{/specialOffers/create}" th:object="${specialOffer}" method="post">
+
+                    <input type="hidden" th:field="*{pizza.id}" id="linked-pizza">
+
+                    <div class="mb-3">
+                        <label class="form-label" for="title">Nome Offerta:</label>
+                        <input th:errorClass="is-invalid" class="form-control" type="text" id="title" th:field="*{title}">
+                        <ul class="invalid-feedback" th:if="${#fields.hasErrors('title')}">
+                            <li  th:each="error : ${#fields.errors('name')}">[[${error}]]</li>
+                        </ul>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="startDate">Data Inizio:</label>
+                        <input th:errorClass="is-invalid" class="form-control" type="date" id="startDate" th:field="*{startDate}">
+                         <ul class="invalid-feedback" th:if="${#fields.hasErrors('startDate')}">
+                            <li  th:each="error : ${#fields.errors('startDate')}">[[${error}]]</li>
+                        </ul>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="endDate">Data Fine:</label>
+                        <input th:errorClass="is-invalid" class="form-control" type="date" id="endDate" th:field="*{endDate}">
+                         <ul class="invalid-feedback" th:if="${#fields.hasErrors('endDate')}">
+                            <li  th:each="error : ${#fields.errors('endDate')}">[[${error}]]</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mb-3 d-flex justify-content-between">
+                        <input type="submit" class="btn btn-success" value="Crea nuova Offerta">
+                        <input type="reset" class="btn btn-danger" value="Resetta tutti i campi">
+                    </div>
+
+
+                </form>
+
+                
+
+            </div>
+
+            </div>
+        </section>
+
+
+    </main>
+    <th:block th:replace="~{fragments/starter::js}"></th:block>
+
+</body>
+
+</html>
