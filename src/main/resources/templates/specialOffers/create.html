@@ -22,8 +22,8 @@
                 <h1 class="my-2 text-center">
                     Special Offer for: "[[${specialOffer.pizza.name}]]"
                 </h1>
-
-                <form id="specialOffer-form" th:action="@{/specialOffers/create}" th:object="${specialOffer}" method="post">
+                
+                <form id="specialOffer-form" th:action="${edit} ? @{|/specialOffers/${specialOffer.id}/edit|} : @{/specialOffers/create}" th:object="${specialOffer}" method="post">
 
                     <input type="hidden" th:field="*{pizza.id}" id="linked-pizza">
 

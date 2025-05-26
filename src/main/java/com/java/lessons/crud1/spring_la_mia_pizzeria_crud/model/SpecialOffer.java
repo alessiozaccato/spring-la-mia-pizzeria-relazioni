@@ -8,7 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-
+import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
@@ -24,7 +24,7 @@ public class SpecialOffer {
     @PastOrPresent(message = "this date cannot be set in the future")
     private LocalDate startDate;
 
-    @PastOrPresent(message = "this date cannot be set in the future")
+    @FutureOrPresent(message = "the end date cannot be set in the past")
     private LocalDate endDate;
 
     @NotBlank(message = "the title cannot be null")
