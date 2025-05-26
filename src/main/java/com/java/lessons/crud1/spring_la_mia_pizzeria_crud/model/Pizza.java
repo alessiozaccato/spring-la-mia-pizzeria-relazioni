@@ -8,6 +8,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
@@ -16,7 +19,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = "pizza")
+@Table(name = "pizzas")
 public class Pizza {
 
     @Id
@@ -65,6 +68,7 @@ public class Pizza {
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
     }
+
     @NotNull(message = "il prezzo non puo essere nullo")
     @Min(value = 3, message = "Il prezzo deve essere almeno 3.")
     private BigDecimal price;
@@ -80,6 +84,10 @@ public class Pizza {
     @OneToMany(mappedBy = "pizza")
     private List<SpecialOffer> specialOffers;
 
+    @ManyToMany
+    @JoinTable(name = "ingredient_pizza", joinColumns = @JoinColumn(name = "pizza_id"), inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
+    private List<Ingredient> ingredients;
+
     public List<SpecialOffer> getSpecialOffers() {
         return this.specialOffers;
     }
@@ -88,6 +96,12 @@ public class Pizza {
         this.specialOffers = specialOffers;
     }
 
-    
+    public List<Ingredient> getIngredients() {
+        return this.ingredients;
+    }
+
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
 
 }

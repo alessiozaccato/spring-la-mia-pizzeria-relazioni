@@ -35,6 +35,9 @@
                         </h4>
                         <a th:href="@{/pizzas/{id}/specialOffer(id=*{id})}" class="btn btn-success">Offerta pizza</a>
                     </div>
+                    <div th:unless="${pizza.getIngredients().size>0}">
+                        there are no ingredients
+                    </div>
                 </div>
                 <div class="col-md-4 mb-4" th:if="${pizza.getSpecialOffers().size()>0}">
                     <ul>
@@ -53,6 +56,11 @@
                     <a th:href="@{/pizzas/{id}/specialOffer(id=*{id})}" class="btn btn-success">Offerta pizza</a>
 
                 </div>
+                <!-- <div th:if="${pizza.getIngredients().size>0}">
+                    <ul>
+                        <li th:each="ingredient : *{ingredients}" th:text="${ingredients.name}"></li>
+                    </ul>
+                </div> -->
 
             </div>
         </section>

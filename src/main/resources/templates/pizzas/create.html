@@ -20,46 +20,60 @@
         <section>
             <div class="container ">
 
-                <form id="pizza-form" th:action="@{/pizzas/create}" th:object="${pizza}" method="post">
+                <form id="pizza-form" th:action="${edit} ? @{/pizzas/edit/{id}(id=${pizza.id})} : @{/pizzas/create}"
+                    th:object="${pizza}" method="post">
                     <div class="mb-3">
                         <label class="form-label" for="name">Nome Pizza:</label>
                         <input th:errorClass="is-invalid" class="form-control" type="text" id="name" th:field="*{name}">
                         <ul class="invalid-feedback" th:if="${#fields.hasErrors('name')}">
-                            <li  th:each="error : ${#fields.errors('name')}">[[${error}]]</li>
+                            <li th:each="error : ${#fields.errors('name')}">[[${error}]]</li>
                         </ul>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="single-ingredient form-check" th:each="ingredient : ${ingredients}">
+                            <input type="checkbox" th:id="|ingredient-${ingredient.id}|"
+                                th:field="${pizza.ingredients}" th:value="${ingredient.id}">
+                            <label th:for="|ingredient-${ingredient.id}|" class="form-check-label"
+                                th:text="${ingredient.name}"></label>
+                        </div>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label" for="imgUrl">Immagine:</label>
-                        <input th:errorClass="is-invalid" class="form-control" type="text" id="imgUrl" th:field="*{imgUrl}">
-                         <ul class="invalid-feedback" th:if="${#fields.hasErrors('imgUrl')}">
-                            <li  th:each="error : ${#fields.errors('imgUrl')}">[[${error}]]</li>
+                        <input th:errorClass="is-invalid" class="form-control" type="text" id="imgUrl"
+                            th:field="*{imgUrl}">
+                        <ul class="invalid-feedback" th:if="${#fields.hasErrors('imgUrl')}">
+                            <li th:each="error : ${#fields.errors('imgUrl')}">[[${error}]]</li>
                         </ul>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="price">Prezzo:</label>
-                        <input th:errorClass="is-invalid" class="form-control" type="number" id="price" th:field="*{price}">
-                         <ul class="invalid-feedback" th:if="${#fields.hasErrors('price')}">
-                            <li  th:each="error : ${#fields.errors('price')}">[[${error}]]</li>
+                        <input th:errorClass="is-invalid" class="form-control" type="number" id="price"
+                            th:field="*{price}">
+                        <ul class="invalid-feedback" th:if="${#fields.hasErrors('price')}">
+                            <li th:each="error : ${#fields.errors('price')}">[[${error}]]</li>
                         </ul>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="description">Descrizione:</label>
-                        <textarea th:errorClass="is-invalid" id="description" class="form-control" th:field="*{description}"></textarea>
-                         <ul class="invalid-feedback" th:if="${#fields.hasErrors('description')}">
-                            <li  th:each="error : ${#fields.errors('description')}">[[${error}]]</li>
+                        <textarea th:errorClass="is-invalid" id="description" class="form-control"
+                            th:field="*{description}"></textarea>
+                        <ul class="invalid-feedback" th:if="${#fields.hasErrors('description')}">
+                            <li th:each="error : ${#fields.errors('description')}">[[${error}]]</li>
                         </ul>
                     </div>
 
                     <div class="mb-3 d-flex justify-content-between">
-                        <input type="submit" class="btn btn-success" value="Crea nuova pizza">
+                        <input type="submit" class="btn btn-success"
+                            th:value="${edit} ? 'aggiorna pizza' : 'Crea nuova pizza'">
                         <input type="reset" class="btn btn-danger" value="Resetta tutti i campi">
                     </div>
 
 
                 </form>
 
-                
+
 
             </div>
 

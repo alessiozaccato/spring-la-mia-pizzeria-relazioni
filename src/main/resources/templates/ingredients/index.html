@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<th:block th:replace="~{fragments/starter::thymeleafThema}"></th:block>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <th:block th:replace="~{fragments/starter::style}"></th:block>
+
+
+
+</head>
+
+<body>
+
+    <th:block th:replace="~{fragments/navbar::navbar}"></th:block>
+
+    <main>
+        <section>
+            <div class="container">
+               
+                <h1 class="my-4">Elenco ingredienti: </h1>
+                <div class="row" th:if="${ingredients.size() > 0}">
+                    <div th:each="ingredient : ${ingredients}" th:object="${ingredient}" class="col-md-4 mb-4">
+                        <div class="card" style="width: 100%;">
+                            
+                            <div class="card-body">
+                                <h5 class="card-title" th:text="|Ingrediente:*{name}|"></h5>
+                                
+                                <a th:href="@{ingredients + '/' +*{id}}" class="btn btn-primary">vai al ingrediente</a>
+                                <a th:href="@{ingredients/edit/{id}(id=*{id})}" class="btn btn-success">modifica ingrediente</a>
+                                <!-- <a th:href="@{ingredients/{id}/specialOffer(id=*{id})}" class="btn btn-success">Offerta pizza</a> -->
+                                <form th:action="@{ingredients/delete/{id}(id=${ingredient.id})}" method="post">
+                                    <button type="submit" class="btn btn-danger">cancella ingrediente</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+
+    </main>
+
+</body>
+
+</html>

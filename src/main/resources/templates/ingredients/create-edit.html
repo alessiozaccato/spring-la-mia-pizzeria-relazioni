@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<th:block th:replace="~{fragments/starter::thymeleafThema}"></th:block>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <th:block th:replace="~{fragments/starter::style}"></th:block>
+
+
+
+</head>
+
+<body>
+
+    <th:block th:replace="~{fragments/navbar::navbar}"></th:block>
+
+    <main>
+        <section>
+            <div class="container ">
+
+                <form id="ingredient-form" th:action="${edit} ? @{/ingredients/edit/{id}(id=${ingredient.id})} : @{/ingredients/create}"
+                    th:object="${ingredient}" method="post">
+                    <div class="mb-3">
+                        <label class="form-label" for="name">Nome Ingrediente:</label>
+                        <input th:errorClass="is-invalid" class="form-control" type="text" id="name" th:field="*{name}">
+                        <ul class="invalid-feedback" th:if="${#fields.hasErrors('name')}">
+                            <li th:each="error : ${#fields.errors('name')}">[[${error}]]</li>
+                        </ul>
+                    </div>
+
+                    
+
+                    <div class="mb-3 d-flex justify-content-between">
+                        <input type="submit" class="btn btn-success"
+                            th:value="${edit} ? 'aggiorna ingrediente' : 'Crea nuovo ingrediente'">
+                        <input type="reset" class="btn btn-danger" value="Resetta tutti i campi">
+                    </div>
+
+
+                </form>
+
+
+
+            </div>
+
+            </div>
+        </section>
+
+
+    </main>
+    <th:block th:replace="~{fragments/starter::js}"></th:block>
+
+</body>
+
+</html>

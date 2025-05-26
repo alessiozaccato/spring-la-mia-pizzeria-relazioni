@@ -1,25 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
 
     <th:block th:fragment="navbar">
         <nav class="navbar navbar-expand navbar-light ">
             <div class="nav navbar-nav">
-                <a th:text="Home" class="nav-item nav-link active" th:href="@{'/home'}" aria-current="page"
-                    ></a
-                >
+                <a th:text="Home" class="nav-item nav-link active" th:href="@{'/home'}" aria-current="page"></a>
                 <a th:text="pizzas" class="nav-item nav-link" th:href="@{'/pizzas'}"></a>
+                <a th:text="ingredients" class="nav-item nav-link" th:href="@{'/ingredients'}"></a>
                 <a th:text="|create pizzas|" class="nav-item nav-link" th:href="@{'/pizzas/create'}"></a>
+                <a th:text="|create ingredients|" class="nav-item nav-link" th:href="@{/ingredients/create}"></a>
 
             </div>
         </nav>
-        
+
     </th:block>
-    
+
 </body>
+
 </html>

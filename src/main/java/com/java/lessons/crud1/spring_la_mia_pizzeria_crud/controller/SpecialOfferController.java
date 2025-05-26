@@ -14,7 +14,6 @@ import com.java.lessons.crud1.spring_la_mia_pizzeria_crud.model.SpecialOffer;
 import com.java.lessons.crud1.spring_la_mia_pizzeria_crud.repositories.SpecialOfferRepository;
 
 import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 @Controller
