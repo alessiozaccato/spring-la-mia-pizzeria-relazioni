@@ -24,7 +24,12 @@
                         <img th:src="*{imgUrl}" class="card-img-top" alt="foto pizza">
                         <div class="card-body">
                             <h5 class="card-title" th:text="|Pizza:*{name}|"></h5>
-                            <p class="card-text" th:text="|prezzo: *{description}|"></p>
+                            <p class="card-text" th:text="|descrizione: *{description}|"></p>
+                            <div th:if="${pizza.getIngredients().size>0}">
+                                <ul>
+                                    <li th:each="ingredient : *{ingredients}" th:text="${ingredient.name}"></li>
+                                </ul>
+                            </div>
                             <p class="card-text" th:text="|prezzo: €*{price}|"></p>
                             <a th:href="@{'/home'}" class="btn btn-primary">torna alla home</a>
                         </div>
@@ -35,7 +40,7 @@
                         </h4>
                         <a th:href="@{/pizzas/{id}/specialOffer(id=*{id})}" class="btn btn-success">Offerta pizza</a>
                     </div>
-                    <div th:unless="${pizza.getIngredients().size>0}">
+                    <div class="alert alert-warning" th:unless="${pizza.getIngredients().size>0}">
                         there are no ingredients
                     </div>
                 </div>
@@ -56,11 +61,7 @@
                     <a th:href="@{/pizzas/{id}/specialOffer(id=*{id})}" class="btn btn-success">Offerta pizza</a>
 
                 </div>
-                <!-- <div th:if="${pizza.getIngredients().size>0}">
-                    <ul>
-                        <li th:each="ingredient : *{ingredients}" th:text="${ingredients.name}"></li>
-                    </ul>
-                </div> -->
+
 
             </div>
         </section>
